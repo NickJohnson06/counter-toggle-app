@@ -92,13 +92,22 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  const SizedBox(height: 20),
+                  Container(
+                    width: 150,
+                    height: 150,
+                    color: Colors.grey.shade300,
+                    child: const Center(
+                      child: Text("Image Placeholder"),
+                    ),
+                  ),
+                  const SizedBox(height: 70),
                   const Text('You have pushed the button this many times:'),
+                  const SizedBox(height: 20),
                   Text(
                     '$_counter',
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
                 ],
               ),
             ),
