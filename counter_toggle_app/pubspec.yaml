@@ -61,9 +61,9 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-    assets:
-      - assets/gt_start_score.png
-      - assets/gt_final_score.png
+  assets:
+    - assets/gt_start_score.png
+    - assets/gt_final_score.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

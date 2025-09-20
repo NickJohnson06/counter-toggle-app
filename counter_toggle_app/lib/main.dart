@@ -59,10 +59,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  bool _showFirstImage = true;
 
   void _incrementCounter() {
     setState(() {
       _counter++;
+    });
+  }
+
+  void _toggleImage() {
+    setState(() {
+      _showFirstImage = !_showFirstImage;
     });
   }
 
@@ -92,15 +99,17 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Container(
-                    width: 150,
-                    height: 150,
-                    color: Colors.grey.shade300,
-                    child: const Center(
-                      child: Text("Image Placeholder"),
-                    ),
+                  Image.asset(
+                    _showFirstImage ? 'assets/gt_start_score.png' : 'assets/gt_final_score.png',
+                    width: 300,
+                    height: 300,
                   ),
-                  const SizedBox(height: 70),
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: _toggleImage,
+                    child: const Text('Toggle Image'),
+                  ),
+                  const SizedBox(height: 20),
                   const Text('You have pushed the button this many times:'),
                   const SizedBox(height: 20),
                   Text(
