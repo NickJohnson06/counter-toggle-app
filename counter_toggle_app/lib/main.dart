@@ -101,17 +101,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                   Image.asset(
                     _showFirstImage ? 'assets/gt_start_score.png' : 'assets/gt_final_score.png',
-                    width: 300,
-                    height: 300,
+                    width: 400,
+                    height: 400,
                   ),
-                  const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: _toggleImage,
                     child: const Text('Toggle Image'),
                   ),
                   const SizedBox(height: 20),
                   const Text('You have pushed the button this many times:'),
-                  const SizedBox(height: 20),
                   Text(
                     '$_counter',
                     style: Theme.of(context).textTheme.headlineMedium,
