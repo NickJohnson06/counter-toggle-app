@@ -57,9 +57,31 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
   int _counter = 0;
   bool _showFirstImage = true;
+  late final AnimationController _controller;
+  late final Animation<double> _fade;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+      value: 1.0,
+    );
+    _fade = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeInOut,
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   void _incrementCounter() {
     setState(() {
@@ -68,8 +90,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _toggleImage() {
-    setState(() {
-      _showFirstImage = !_showFirstImage;
+    if (_controller.isAnimating) return;
+    _controller.reverse().then((_) {
+      setState(() {
+        _showFirstImage = !_showFirstImage;
+      });
+      _controller.forward();
     });
   }
 
@@ -99,10 +125,13 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Image.asset(
-                    _showFirstImage ? 'assets/gt_start_score.png' : 'assets/gt_final_score.png',
-                    width: 400,
-                    height: 400,
+                  FadeTransition(
+                    opacity: _fade,
+                    child: Image.asset(
+                      _showFirstImage ? 'assets/gt_start_score.png' : 'assets/gt_final_score.png',
+                      width: 400,
+                      height: 400,
+                    ),
                   ),
                   ElevatedButton(
                     onPressed: _toggleImage,
